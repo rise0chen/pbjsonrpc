@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package test.common;
+
+enum CommonEnumeration {
+  UNKNOWN = 0;
+  A = 1;
+}
+message CommonMessage {
+  google.protobuf.Empty empty = 1;
+  CommonEnumeration enum = 3;
+  repeated google.protobuf.Empty emptys = 11;
+  repeated CommonEnumeration enums = 13;
+}
+message CommonRequest {
+  google.protobuf.Empty empty = 1;
+  CommonMessage message = 2;
+  CommonEnumeration enum = 3;
+  repeated google.protobuf.Empty emptys = 11;
+  repeated CommonMessage messages = 12;
+  repeated CommonEnumeration enums = 13;
+}
+message CommonResponse {
+  google.protobuf.Empty empty = 1;
+  CommonMessage message = 2;
+  CommonEnumeration enum = 3;
+  repeated google.protobuf.Empty emptys = 11;
+  repeated CommonMessage messages = 12;
+  repeated CommonEnumeration enums = 13;
+}
+
+
+service CommonService {
+  rpc SubCommon(CommonRequest) returns (stream CommonResponse);
+  rpc SubEmpty(google.protobuf.Empty) returns (stream google.protobuf.Empty);
+  rpc Common(CommonRequest) returns (CommonResponse);
+  rpc Empty(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
