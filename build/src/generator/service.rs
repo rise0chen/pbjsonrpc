@@ -40,13 +40,13 @@ fn write_method<W: Write>(
             .map(|f| {
                 if let FieldModifier::Repeated = f.field_modifier {
                     format!(
-                        "{}: Vec<{}>",
+                        "{}: Option<Vec<{}>>",
                         f.rust_field_name(),
                         resolver.field_type(&f.field_type)
                     )
                 } else {
                     format!(
-                        "{}: {}",
+                        "{}: Option<{}>",
                         f.rust_field_name(),
                         resolver.field_type(&f.field_type)
                     )
