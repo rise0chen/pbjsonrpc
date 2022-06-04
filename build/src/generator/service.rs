@@ -1,5 +1,5 @@
 use super::{write_jsonrpsee_end, write_jsonrpsee_start, Indent};
-use crate::message::{FieldModifier, Method, Service};
+use crate::message::{FieldModifier, FieldType, Method, Service};
 use crate::resolver::Resolver;
 use std::io::{Result, Write};
 
@@ -29,7 +29,7 @@ fn write_method<W: Write>(
     let mut name = name.as_str();
     let args: Vec<_> = if method.input.path.prefix_match(".google.protobuf").is_some() {
         vec![format!(
-            "{}: {}",
+            "{}: Option<{}>",
             "arg",
             resolver.rust_type(&method.input.path)
         )]
@@ -39,18 +39,20 @@ fn write_method<W: Write>(
             .all_fields()
             .map(|f| {
                 if let FieldModifier::Repeated = f.field_modifier {
-                    format!(
-                        "{}: Option<Vec<{}>>",
-                        f.rust_field_name(),
-                        resolver.field_type(&f.field_type)
-                    )
-                } else {
-                    format!(
-                        "{}: Option<{}>",
-                        f.rust_field_name(),
-                        resolver.field_type(&f.field_type)
-                    )
+                    if let FieldType::Map(..) = f.field_type {
+                    } else {
+                        return format!(
+                            "{}: Option<Vec<{}>>",
+                            f.rust_field_name(),
+                            resolver.field_type(&f.field_type)
+                        );
+                    }
                 }
+                format!(
+                    "{}: Option<{}>",
+                    f.rust_field_name(),
+                    resolver.field_type(&f.field_type)
+                )
             })
             .collect()
     };

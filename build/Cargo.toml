@@ -6,7 +6,7 @@ keywords = ["protobuf", "json", "jsonrpc"]
 license = "MIT"
 name = "pbjsonrpc-build"
 repository = "https://github.com/rise0chen/pbjsonrpc"
-version = "0.0.2"
+version = "0.0.3"
 
 [dependencies]
 heck = "0.4"
