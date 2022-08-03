@@ -4,16 +4,16 @@ description = "test"
 edition = "2018"
 name = "pbjsonrpc-test"
 repository = "https://github.com/rise0chen/pbjsonrpc"
-version = "0.0.1"
+version = "0.1.0"
 
 [dependencies]
-jsonrpsee = {version = "0.13", features = ["server", "client", "macros"]}
+jsonrpsee = {version = "0.15", features = ["server", "client", "macros"]}
 pbjson = "0.3"
 pbjson-types = "0.3"
-prost = "0.10"
+prost = "0.11"
 serde = {version = "1.0", features = ["derive"]}
 
 [build-dependencies]
 pbjson-build = "0.3"
 pbjsonrpc-build = {path = "../build"}
-prost-build = "0.10"
+prost-build = "0.11"
