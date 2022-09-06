@@ -38,7 +38,7 @@ impl ScalarType {
             ScalarType::U64 => "u64",
             ScalarType::Bool => "bool",
             ScalarType::String => "String",
-            ScalarType::Bytes => "Vec<u8>",
+            ScalarType::Bytes => "String",
         }
     }
 
