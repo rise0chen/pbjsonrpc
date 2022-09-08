@@ -22,7 +22,7 @@ pub struct Builder {
     out_dir: Option<PathBuf>,
     extern_paths: Vec<(String, String)>,
     retain_enum_prefix: bool,
-    ignore_unknown_fields: bool,
+    unfold_args: bool,
 }
 
 impl Builder {
@@ -81,11 +81,9 @@ impl Builder {
         self
     }
 
-    /// Don't error out in the presence of unknown fields when deserializing,
-    /// instead skip the field.
-    pub fn ignore_unknown_fields(&mut self) -> &mut Self {
-        self.ignore_unknown_fields = true;
-
+    /// unfold all args in method
+    pub fn unfold_args(&mut self) -> &mut Self {
+        self.unfold_args = true;
         self
     }
 
@@ -163,7 +161,7 @@ impl Builder {
             match descriptor {
                 Descriptor::Service(descriptor) => {
                     if let Some(service) = resolve_service(&self.descriptors, descriptor) {
-                        generate_service(&resolver, &service, writer)?
+                        generate_service(&resolver, &service, writer, self.unfold_args)?
                     }
                 }
                 _ => {}

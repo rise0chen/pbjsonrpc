@@ -30,9 +30,5 @@ fn write_jsonrpsee_start<W: Write>(indent: usize, rust_type: &str, writer: &mut 
 }
 
 fn write_jsonrpsee_end<W: Write>(indent: usize, writer: &mut W) -> Result<()> {
-    writeln!(
-        writer,
-        r#"{indent}}}"#,
-        indent = Indent(indent),
-    )
+    writeln!(writer, r#"{indent}}}"#, indent = Indent(indent),)
 }

@@ -7,13 +7,14 @@ pub fn generate_service<W: Write>(
     resolver: &Resolver<'_>,
     service: &Service,
     writer: &mut W,
+    unfold_args: bool,
 ) -> Result<()> {
     let rust_type = resolver.rust_type(&service.path);
 
     // Generate Serialize
     write_jsonrpsee_start(0, &rust_type, writer)?;
     for method in &service.methods {
-        write_method(resolver, 2, &method, writer)?;
+        write_method(resolver, 2, &method, writer, unfold_args)?;
     }
     write_jsonrpsee_end(0, writer)?;
     Ok(())
@@ -24,13 +25,16 @@ fn write_method<W: Write>(
     indent: usize,
     method: &Method,
     writer: &mut W,
+    unfold_args: bool,
 ) -> Result<()> {
     let name = method.rust_method_name();
     let mut name = name.as_str();
-    let args: Vec<_> = if method.input.path.prefix_match(".google.protobuf").is_some() {
+    let need_unfold_args =
+        unfold_args && method.input.path.prefix_match(".google.protobuf").is_none();
+    let args: Vec<_> = if !need_unfold_args {
         vec![format!(
             "{}: Option<{}>",
-            "arg",
+            "args",
             resolver.rust_type(&method.input.path)
         )]
     } else {
