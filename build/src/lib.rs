@@ -23,6 +23,8 @@ pub struct Builder {
     extern_paths: Vec<(String, String)>,
     retain_enum_prefix: bool,
     unfold_args: bool,
+    server: bool,
+    client: bool,
 }
 
 impl Builder {
@@ -84,6 +86,15 @@ impl Builder {
     /// unfold all args in method
     pub fn unfold_args(&mut self) -> &mut Self {
         self.unfold_args = true;
+        self
+    }
+
+    pub fn server(&mut self) -> &mut Self {
+        self.server = true;
+        self
+    }
+    pub fn client(&mut self) -> &mut Self {
+        self.client = true;
         self
     }
 
@@ -161,7 +172,14 @@ impl Builder {
             match descriptor {
                 Descriptor::Service(descriptor) => {
                     if let Some(service) = resolve_service(&self.descriptors, descriptor) {
-                        generate_service(&resolver, &service, writer, self.unfold_args)?
+                        generate_service(
+                            &resolver,
+                            &service,
+                            writer,
+                            self.unfold_args,
+                            self.server,
+                            self.client,
+                        )?
                     }
                 }
                 _ => {}

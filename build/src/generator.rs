@@ -19,10 +19,22 @@ impl Display for Indent {
     }
 }
 
-fn write_jsonrpsee_start<W: Write>(indent: usize, rust_type: &str, writer: &mut W) -> Result<()> {
+fn write_jsonrpsee_start<W: Write>(
+    indent: usize,
+    rust_type: &str,
+    writer: &mut W,
+    server: bool,
+    client: bool,
+) -> Result<()> {
+    let tag = match (server, client) {
+        (true, true) => "server, client",
+        (true, false) => "server",
+        (false, true) => "client",
+        (false, false) => "",
+    };
     writeln!(
         writer,
-        r#"{indent}#[jsonrpsee::proc_macros::rpc(server, client)]
+        r#"{indent}#[jsonrpsee::proc_macros::rpc({tag})]
 {indent}pub trait {rust_type} {{"#,
         indent = Indent(indent),
         rust_type = rust_type

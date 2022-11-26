@@ -8,11 +8,13 @@ pub fn generate_service<W: Write>(
     service: &Service,
     writer: &mut W,
     unfold_args: bool,
+    server: bool,
+    client: bool,
 ) -> Result<()> {
     let rust_type = resolver.rust_type(&service.path);
 
     // Generate Serialize
-    write_jsonrpsee_start(0, &rust_type, writer)?;
+    write_jsonrpsee_start(0, &rust_type, writer, server, client)?;
     for method in &service.methods {
         write_method(resolver, 2, &method, writer, unfold_args)?;
     }
