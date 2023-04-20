@@ -76,7 +76,7 @@ fn write_method<W: Write>(
         )?;
         writeln!(
             writer,
-            r#"{indent}fn sub_{name}(&self, {args});"#,
+            r#"{indent}async fn sub_{name}(&self, {args})-> jsonrpsee::core::SubscriptionResult;"#,
             indent = Indent(indent),
             name = name,
             args = args.join(", ")

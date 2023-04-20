@@ -29,6 +29,8 @@ fn main() -> Result<()> {
         .build(&[".test"])?;
     pbjsonrpc_build::Builder::new()
         .register_descriptors(&descriptor_set)?
+        .server()
+        .client()
         .build(&[".test"])?;
 
     Ok(())
