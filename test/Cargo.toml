@@ -1,19 +1,19 @@
 [package]
 authors = ["rise0chen <rise0chen@163.com>"]
 description = "test"
-edition = "2018"
+edition = "2021"
 name = "pbjsonrpc-test"
 repository = "https://github.com/rise0chen/pbjsonrpc"
-version = "0.1.0"
+version = "0.2.0"
 
 [dependencies]
-jsonrpsee = {version = "0.17", features = ["server", "client", "macros"]}
-pbjson = "0.5"
-pbjson-types = "0.5"
-prost = "0.11"
+jsonrpsee = {version = "0.20", features = ["server", "client", "macros"]}
+pbjson = "0.6"
+pbjson-types = "0.6"
+prost = "0.12"
 serde = {version = "1.0", features = ["derive"]}
 
 [build-dependencies]
-pbjson-build = "0.5"
+pbjson-build = "0.6"
 pbjsonrpc-build = {path = "../build"}
-prost-build = "0.11"
+prost-build = "0.12"
