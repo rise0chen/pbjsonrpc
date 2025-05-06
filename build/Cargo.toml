@@ -1,16 +1,16 @@
 [package]
 authors = ["rise0chen<rise0chen@163.com>"]
 description = "Generates jsonrpsee trait for prost message types"
-edition = "2021"
+edition = "2024"
 keywords = ["protobuf", "json", "jsonrpc"]
 license = "MIT"
 name = "pbjsonrpc-build"
 repository = "https://github.com/rise0chen/pbjsonrpc"
-version = "0.24.1"
+version = "0.25.0"
 
 [dependencies]
 heck = "0.5"
-itertools = "0.13"
+itertools = "0.14"
 prost = "0.13"
 prost-types = "0.13"
 

@@ -1,13 +1,13 @@
 [package]
 authors = ["rise0chen <rise0chen@163.com>"]
 description = "test"
-edition = "2021"
+edition = "2024"
 name = "pbjsonrpc-test"
 repository = "https://github.com/rise0chen/pbjsonrpc"
 version = "0.2.0"
 
 [dependencies]
-jsonrpsee = {version = "0.24", features = ["server", "client", "macros"]}
+jsonrpsee = {version = "0.25", features = ["server", "client", "macros"]}
 pbjson = "0.7"
 pbjson-types = "0.7"
 prost = "0.13"
