@@ -6,13 +6,13 @@ keywords = ["protobuf", "json", "jsonrpc"]
 license = "MIT"
 name = "pbjsonrpc-build"
 repository = "https://github.com/rise0chen/pbjsonrpc"
-version = "0.25.0"
+version = "0.26.0"
 
 [dependencies]
 heck = "0.5"
 itertools = "0.14"
-prost = "0.13"
-prost-types = "0.13"
+prost = "0.14"
+prost-types = "0.14"
 
 [dev-dependencies]
 tempfile = "3.1"

@@ -7,13 +7,13 @@ repository = "https://github.com/rise0chen/pbjsonrpc"
 version = "0.2.0"
 
 [dependencies]
-jsonrpsee = {version = "0.25", features = ["server", "client", "macros"]}
-pbjson = "0.7"
-pbjson-types = "0.7"
-prost = "0.13"
+jsonrpsee = {version = "0.26", features = ["server", "client", "macros"]}
+pbjson = "0.8"
+pbjson-types = "0.8"
+prost = "0.14"
 serde = {version = "1.0", features = ["derive"]}
 
 [build-dependencies]
-pbjson-build = "0.7"
+pbjson-build = "0.8"
 pbjsonrpc-build = {path = "../build"}
-prost-build = "0.13"
+prost-build = "0.14"
